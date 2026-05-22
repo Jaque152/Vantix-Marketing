@@ -166,10 +166,9 @@ export default function CheckoutPage() {
                   [ 02. {isEs ? 'Procesador: OctanoApi' : 'Processor: OctanoApi'} ]
                 </h2>
                 <div className="flex items-center gap-2 mt-4 sm:mt-0 opacity-80">
-                  <Lock className="w-4 h-4 text-[var(--accent-primary)]" />
-                  <span className="font-mono text-[10px] tracking-widest">SECURE_PAYMENT</span>
+                  <img src="/logo-octano-2.png" alt="Octano" className="h-6 opacity-60 mix-blend-multiply" />
                 </div>
-                <img src="/etomin_logo.svg" alt="Etomin" className="h-6 opacity-60 mix-blend-multiply" />
+                
 
               </div>
               
