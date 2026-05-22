@@ -11,7 +11,7 @@ export default function TermsConditionsPage() {
           <div className="space-y-6 text-[var(--text-main)]/80 leading-relaxed font-medium">
             <div className="bg-white/50 p-6 rounded-2xl mb-8 border border-white/50">
               <p><strong>EKOLUK MKT DIGITAL S.A. DE C.V. • VANTIX MARKETING</strong></p> {/* [cite: 52, 124] */}
-              <p>Portal: draxendigital.com • Canal de Atención:  informacion@vantixmkt.com</p> {/* [cite: 52] */}
+              <p>Portal: vantixmkt.com • Canal de Atención:  informacion@vantixmkt.com</p> {/* [cite: 52] */}
               <p>Sede Corporativa: CALLE RÍO GUADIANA NO.23 PISO 2, COL. RENACIMIENTO, ALCALDÍA CUAUHTÉMOC, C.P. 06500 CIUDAD DE MÉXICO, CDMX</p> {/* [cite: 52, 53] */}
               <p>Vigencia del presente acuerdo: Mayo 2026</p> {/* [cite: 53] */}
             </div>

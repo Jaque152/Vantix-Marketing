@@ -2,22 +2,25 @@ import { Resend } from 'resend';
 import { Checkout, CartItem } from '@/types';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM_EMAIL = ' ventas@vantixmkt.com'; 
-const INTERNAL_EMAIL = ' informacion@vantixmkt.com';
+const FROM_EMAIL = 'ventas@vantixmkt.com'; 
+const INTERNAL_EMAIL = 'informacion@vantixmkt.com';
 
 const formatPrice = (price: number) => 
   new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" }).format(price);
 
-// Paleta Ciber-Audaz adaptada para clientes de correo
+// Paleta "Precisión Aerodinámica" Vantix
 const emailTheme = {
-  bgDark: '#020617', // Slate 950
-  cardDark: '#0f172a', // Slate 900
-  accentCyan: '#06b6d4',
-  accentMagenta: '#d946ef',
-  textLight: '#f8fafc',
-  textMuted: '#94a3b8',
-  borderDark: '#1e293b'
+  bgMain: '#FFFFFF', // Blanco
+  bgSecondary: '#F4F4F5', // Gris técnico
+  textMain: '#09090B', // Casi negro
+  textMuted: '#71717A', // Gris oscuro
+  accentPrimary: '#E11D48', // Rojo Carmesí
+  borderMain: '#09090B' // Borde duro
 };
+
+// Fuentes para compatibilidad universal de correo
+const fontSans = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const fontMono = "'Courier New', Courier, monospace";
 
 // ============================================================================
 // 1. EMAIL DE CHECKOUT (Cliente e Interno)
@@ -27,53 +30,65 @@ export async function sendReceiptEmail(
   items: CartItem[], 
   isEnglish: boolean = false
 ) {
-  // --- A. PLANTILLA DISRUPTIVA PARA EL CLIENTE ---
+  // --- A. PLANTILLA TÉCNICA PARA EL CLIENTE ---
   const subjectClient = isEnglish 
-    ? `System Activated - Welcome to VANTIX MARKETING` 
-    : `Sistema Activado - Bienvenido a VANTIX MARKETING`;
+    ? `[ VANTIX ] - Deployment Authorized` 
+    : `[ VANTIX ] - Despliegue Autorizado`;
 
   const htmlClient = `
-    <div style="font-family: 'Inter', Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; color: ${emailTheme.textLight}; background-color: ${emailTheme.bgDark}; border-radius: 16px; overflow: hidden; border: 1px solid ${emailTheme.borderDark};">
+    <div style="font-family: ${fontSans}; max-width: 600px; margin: auto; color: ${emailTheme.textMain}; background-color: ${emailTheme.bgMain}; border: 2px solid ${emailTheme.borderMain};">
       
-      <!-- Cabecera con franja de neón -->
-      <div style="background-color: ${emailTheme.cardDark}; padding: 40px 30px; text-align: center; border-bottom: 3px solid ${emailTheme.accentMagenta};">
-        <h1 style="color: ${emailTheme.textLight}; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px;">
-          VANTIX MARKETING<span style="color: ${emailTheme.accentCyan};">.</span>
+      <div style="background-color: ${emailTheme.bgSecondary}; padding: 30px; text-align: left; border-bottom: 2px solid ${emailTheme.borderMain};">
+        <div style="font-family: ${fontMono}; color: ${emailTheme.accentPrimary}; font-size: 11px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px;">
+          [ TERMINAL DE INVERSIÓN ]
+        </div>
+        <h1 style="color: ${emailTheme.textMain}; margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">
+          VANTIX MARKETING<span style="color: ${emailTheme.accentPrimary};">.</span>
         </h1>
-        <p style="color: ${emailTheme.accentMagenta}; font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; font-weight: bold;">Performance Agency</p>
+        <p style="color: ${emailTheme.textMuted}; font-family: ${fontMono}; font-size: 12px; margin-top: 10px; font-weight: bold; text-transform: uppercase;">
+          ${isEnglish ? 'Growth Engineering' : 'Ingeniería de Crecimiento'}
+        </p>
       </div>
 
       <div style="padding: 40px 30px;">
-        <h2 style="color: ${emailTheme.textLight}; margin-top: 0; font-size: 20px; font-weight: 700;">${isEnglish ? 'Hello' : 'Hola'} ${checkout.nombre},</h2>
-        <p style="font-size: 15px; color: ${emailTheme.textMuted}; line-height: 1.6;">
+        <h2 style="color: ${emailTheme.textMain}; margin-top: 0; font-size: 20px; font-weight: 800; text-transform: uppercase;">
+          ${isEnglish ? 'STATUS: APPROVED' : 'STATUS: APROBADO'}
+        </h2>
+        <p style="font-size: 15px; color: ${emailTheme.textMuted}; line-height: 1.6; font-weight: 500;">
           ${isEnglish 
-            ? 'Your payment was successfully processed. Your growth system is now in the development phase.' 
-            : 'Tu pago fue procesado con éxito. Tu sistema de crecimiento ha entrado en fase de desarrollo.'}
+            ? `> Signal received, ${checkout.nombre}. Your transaction was successfully processed by OctanoPayments. Your infrastructure is now in the deployment phase.` 
+            : `> Señal recibida, ${checkout.nombre}. Su transacción fue procesada con éxito por OctanoPayments. La infraestructura solicitada ha entrado en fase de despliegue.`}
         </p>
         
-        <table style="width: 100%; border-collapse: collapse; margin: 30px 0;">
+        <table style="width: 100%; border-collapse: collapse; margin: 40px 0; border-top: 2px solid ${emailTheme.borderMain}; border-bottom: 2px solid ${emailTheme.borderMain};">
           <thead>
-            <tr style="border-bottom: 1px solid ${emailTheme.borderDark}; text-align: left;">
-              <th style="padding: 12px 0; color: ${emailTheme.textMuted}; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">${isEnglish ? 'Service' : 'Servicio'}</th>
-              <th style="padding: 12px 0; color: ${emailTheme.textMuted}; font-size: 11px; text-transform: uppercase; text-align: right; letter-spacing: 1px;">${isEnglish ? 'Investment' : 'Inversión'}</th>
+            <tr style="background-color: ${emailTheme.bgSecondary}; text-align: left;">
+              <th style="padding: 15px 10px; color: ${emailTheme.textMain}; font-family: ${fontMono}; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">${isEnglish ? 'Protocol' : 'Protocolo'}</th>
+              <th style="padding: 15px 10px; color: ${emailTheme.textMain}; font-family: ${fontMono}; font-size: 11px; font-weight: bold; text-transform: uppercase; text-align: right; letter-spacing: 1px;">${isEnglish ? 'Value' : 'Valor'}</th>
             </tr>
           </thead>
           <tbody>
             ${items.map(item => `
-              <tr style="border-bottom: 1px solid ${emailTheme.borderDark};">
-                <td style="padding: 15px 0; color: ${emailTheme.textLight}; font-size: 14px; font-weight: 600;">
-                  ${item.vx_plans?.title || 'Custom Plan'}
-                  ${item.quote_id ? `<br><span style="font-size:12px; color:${emailTheme.accentCyan}; font-family: monospace;">Ref: ${item.quote_id}</span>` : ''}
+              <tr style="border-bottom: 1px solid #E4E4E7;">
+                <td style="padding: 15px 10px; color: ${emailTheme.textMain}; font-size: 14px; font-weight: 700; text-transform: uppercase;">
+                  ${item.quantity}x ${item.vx_plans?.title || 'Desarrollo a Medida'}
+                  ${item.quote_id ? `<br><span style="font-size:11px; color:${emailTheme.textMuted}; font-family: ${fontMono}; margin-top: 4px; display: inline-block;">REF: ${item.quote_id}</span>` : ''}
                 </td>
-                <td style="padding: 15px 0; text-align: right; color: ${emailTheme.textLight}; font-size: 14px; font-weight: bold;">${formatPrice(item.custom_price || item.vx_plans?.price || 0)}</td>
+                <td style="padding: 15px 10px; text-align: right; color: ${emailTheme.textMain}; font-size: 14px; font-weight: bold; font-family: ${fontMono};">
+                  ${formatPrice(item.custom_price || item.vx_plans?.price || 0)}
+                </td>
               </tr>
             `).join('')}
           </tbody>
         </table>
 
-        <div style="background-color: ${emailTheme.cardDark}; border-radius: 12px; padding: 25px; text-align: right; border-left: 4px solid ${emailTheme.accentCyan};">
-          <span style="font-size: 11px; color: ${emailTheme.textMuted}; text-transform: uppercase; letter-spacing: 1px;">Total (IVA Incluido)</span>
-          <span style="font-size: 28px; font-weight: 800; color: ${emailTheme.accentMagenta}; display: block; margin-top: 5px;">${formatPrice(checkout.total_estimado)}</span>
+        <div style="background-color: ${emailTheme.textMain}; padding: 25px; text-align: right;">
+          <span style="font-size: 11px; color: #A1A1AA; font-family: ${fontMono}; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+            ${isEnglish ? '[ TOTAL INVESTMENT (TAX INCLUDED) ]' : '[ TOTAL INVERSIÓN (IVA INCLUIDO) ]'}
+          </span>
+          <span style="font-size: 28px; font-weight: 900; color: #FFFFFF; display: block; margin-top: 8px;">
+            ${formatPrice(checkout.total_estimado)}
+          </span>
         </div>
       </div>
     </div>
@@ -81,31 +96,36 @@ export async function sendReceiptEmail(
 
   // --- B. PLANTILLA PARA EL EQUIPO INTERNO ---
   const htmlInternal = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #ffffff;">
-      <h2 style="color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 10px;">⚡ Nueva Venta - VANTIX MARKETING</h2>
-      <p style="color: #555;"><strong>ID Transacción:</strong> ${checkout.id}</p>
+    <div style="font-family: ${fontSans}; max-width: 600px; padding: 0; border: 2px solid #09090B; background-color: #FFFFFF;">
+      <div style="background-color: #09090B; padding: 20px; color: #FFFFFF;">
+        <h2 style="margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px;">🚨 [ ALERTA DE SISTEMA: NUEVO INGRESO ]</h2>
+      </div>
       
-      <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <tr><td colspan="2" style="background: #f4f6f8; padding: 10px; font-weight: bold; color: #333;">Datos del Cliente</td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; width: 30%;"><strong>Nombre:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;">${checkout.nombre} ${checkout.apellidos}</td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Email:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${checkout.correo_electronico}">${checkout.correo_electronico}</a></td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Teléfono:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;">${checkout.telefono || 'No proporcionado'}</td></tr>
-      </table>
+      <div style="padding: 30px;">
+        <p style="font-family: ${fontMono}; font-size: 12px; color: #71717A; margin-top: 0;"><strong>ID_TRANSACCIÓN:</strong> ${checkout.id}</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 25px; border: 1px solid #09090B;">
+          <tr><td colspan="2" style="background: #F4F4F5; padding: 12px; font-weight: bold; color: #09090B; text-transform: uppercase; font-size: 12px; border-bottom: 1px solid #09090B;">Datos de Facturación</td></tr>
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; width: 30%; font-size: 13px;"><strong>Nombre:</strong></td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;">${checkout.nombre} ${checkout.apellidos}</td></tr>
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;"><strong>Email:</strong></td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;"><a href="mailto:${checkout.correo_electronico}" style="color: #E11D48;">${checkout.correo_electronico}</a></td></tr>
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;"><strong>Teléfono:</strong></td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;">${checkout.telefono || 'No proporcionado'}</td></tr>
+        </table>
 
-      <h3 style="margin-top: 25px; color: #333;">Detalle del Arsenal Adquirido</h3>
-      <ul style="color: #444;">
-        ${items.map(item => `
-          <li style="margin-bottom: 8px;">
-            ${item.quantity}x <strong>${item.vx_plans?.title || 'Custom Plan'}</strong> 
-            - ${formatPrice(item.custom_price || item.vx_plans?.price || 0)}
-          </li>
-        `).join('')}
-      </ul>
-      
-      <div style="margin-top: 20px; padding: 15px; background: #0f172a; color: white; border-radius: 6px; text-align: right;">
-        <p style="margin: 5px 0; color: #94a3b8;">Subtotal: ${formatPrice(checkout.subtotal)}</p>
-        <p style="margin: 5px 0; color: #94a3b8;">Impuestos: ${formatPrice(checkout.impuesto)}</p>
-        <p style="margin: 10px 0 0 0; font-size: 18px; color: #d946ef;"><strong>TOTAL COBRADO: ${formatPrice(checkout.total_estimado)}</strong></p>
+        <h3 style="margin-top: 30px; color: #09090B; font-size: 14px; text-transform: uppercase; border-bottom: 2px solid #09090B; padding-bottom: 5px;">Protocolos Adquiridos</h3>
+        <ul style="color: #09090B; font-size: 14px; padding-left: 20px;">
+          ${items.map(item => `
+            <li style="margin-bottom: 10px;">
+              <strong>[ ${item.quantity}x ]</strong> ${item.vx_plans?.title || 'Desarrollo a Medida'} 
+              <br><span style="font-family: ${fontMono}; color: #71717A; font-size: 12px;">VALOR: ${formatPrice(item.custom_price || item.vx_plans?.price || 0)}</span>
+            </li>
+          `).join('')}
+        </ul>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #F4F4F5; border: 2px dashed #09090B; text-align: right; font-family: ${fontMono};">
+          <p style="margin: 5px 0; color: #71717A; font-size: 12px;">SUBTOTAL: ${formatPrice(checkout.subtotal)}</p>
+          <p style="margin: 5px 0; color: #71717A; font-size: 12px;">IMPUESTOS: ${formatPrice(checkout.impuesto)}</p>
+          <p style="margin: 15px 0 0 0; font-size: 20px; color: #E11D48;"><strong>TOTAL: ${formatPrice(checkout.total_estimado)}</strong></p>
+        </div>
       </div>
     </div>
   `;
@@ -118,9 +138,9 @@ export async function sendReceiptEmail(
       html: htmlClient,
     }),
     resend.emails.send({
-      from: `Sales Bot <${FROM_EMAIL}>`,
+      from: `System Bot <${FROM_EMAIL}>`,
       to: [INTERNAL_EMAIL],
-      subject: `[VENTA] ${checkout.nombre} ${checkout.apellidos} - ${formatPrice(checkout.total_estimado)}`,
+      subject: `[ INGRESO ] ${checkout.nombre} ${checkout.apellidos} - ${formatPrice(checkout.total_estimado)}`,
       html: htmlInternal,
     })
   ]);
@@ -140,33 +160,38 @@ export interface ContactFormData {
 
 export async function sendContactConfirmationEmail(data: ContactFormData, isEnglish: boolean = false) {
   
-  // --- A. PLANTILLA DISRUPTIVA PARA EL CLIENTE ---
+  // --- A. PLANTILLA TÉCNICA PARA EL CLIENTE ---
   const subjectClient = isEnglish 
-    ? "Signal Received - VANTIX MARKETING" 
-    : "Señal Recibida - VANTIX MARKETING";
+    ? "[ VANTIX ] - Telemetry Received" 
+    : "[ VANTIX ] - Telemetría Recibida";
   
   const htmlClient = `
-    <div style="font-family: 'Inter', Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; color: ${emailTheme.textLight}; background-color: ${emailTheme.bgDark}; border-radius: 16px; overflow: hidden; border: 1px solid ${emailTheme.borderDark};">
+    <div style="font-family: ${fontSans}; max-width: 600px; margin: auto; color: ${emailTheme.textMain}; background-color: ${emailTheme.bgMain}; border: 2px solid ${emailTheme.borderMain};">
       
-      <div style="background-color: ${emailTheme.cardDark}; padding: 40px 30px; text-align: center; border-bottom: 3px solid ${emailTheme.accentCyan};">
-        <h1 style="color: ${emailTheme.textLight}; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px;">
-          VANTIX MARKETING<span style="color: ${emailTheme.accentMagenta};">.</span>
+      <div style="background-color: ${emailTheme.bgSecondary}; padding: 30px; text-align: left; border-bottom: 2px solid ${emailTheme.borderMain};">
+        <div style="font-family: ${fontMono}; color: ${emailTheme.accentPrimary}; font-size: 11px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px;">
+          [ SEC.03 - COMUNICACIÓN ]
+        </div>
+        <h1 style="color: ${emailTheme.textMain}; margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">
+          VANTIX MARKETING<span style="color: ${emailTheme.accentPrimary};">.</span>
         </h1>
       </div>
       
       <div style="padding: 40px 30px;">
-        <h2 style="color: ${emailTheme.textLight}; margin-top: 0; font-size: 20px; font-weight: 700;">
-          ${isEnglish ? `Hi ${data.nombre_completo},` : `Hola ${data.nombre_completo},`}
+        <h2 style="color: ${emailTheme.textMain}; margin-top: 0; font-size: 20px; font-weight: 800; text-transform: uppercase;">
+          ${isEnglish ? `CONNECTION ESTABLISHED,` : `CONEXIÓN ESTABLECIDA,`}<br>
+          <span style="color: ${emailTheme.accentPrimary};">${data.nombre_completo.toUpperCase()}</span>
         </h2>
-        <p style="font-size: 15px; color: ${emailTheme.textMuted}; line-height: 1.6;">
+        <p style="font-size: 15px; color: ${emailTheme.textMuted}; line-height: 1.6; font-weight: 500; margin-top: 20px;">
           ${isEnglish 
-            ? 'We have received your data. Our performance team is reviewing your case and will contact you shortly to start hacking your growth.' 
-            : 'Hemos interceptado tus datos correctamente. Nuestro equipo de performance está revisando tu caso y te contactará en breve.'}
+            ? '> Data successfully received at headquarters. A growth engineer is analyzing your commercial infrastructure and will contact you shortly.' 
+            : '> Datos recibidos exitosamente en la central. Un ingeniero de crecimiento está analizando tu infraestructura comercial y se pondrá en contacto a la brevedad.'}
         </p>
 
-        <div style="background-color: ${emailTheme.cardDark}; border-radius: 12px; padding: 25px; margin-top: 30px; border-left: 4px solid ${emailTheme.accentMagenta};">
-          <p style="font-size: 14px; color: ${emailTheme.textMuted}; margin: 5px 0;"><strong>${isEnglish ? 'Subject:' : 'Asunto:'}</strong> ${data.asunto}</p>
-          <p style="font-size: 14px; color: ${emailTheme.textMuted}; margin: 5px 0;"><strong>${isEnglish ? 'Company:' : 'Empresa:'}</strong> ${data.empresa_negocio}</p>
+        <div style="background-color: ${emailTheme.bgSecondary}; border: 1px solid ${emailTheme.borderMain}; padding: 20px; margin-top: 35px; border-left: 4px solid ${emailTheme.accentPrimary};">
+          <p style="font-size: 12px; font-family: ${fontMono}; color: ${emailTheme.textMain}; margin: 5px 0; font-weight: bold;">[ ${isEnglish ? 'REFERENCE' : 'REFERENCIA'} ]</p>
+          <p style="font-size: 14px; color: ${emailTheme.textMuted}; margin: 10px 0 5px 0;"><strong>${isEnglish ? 'SUBJECT:' : 'ASUNTO:'}</strong> ${data.asunto}</p>
+          <p style="font-size: 14px; color: ${emailTheme.textMuted}; margin: 5px 0;"><strong>${isEnglish ? 'COMPANY:' : 'EMPRESA:'}</strong> ${data.empresa_negocio}</p>
         </div>
       </div>
     </div>
@@ -174,19 +199,23 @@ export async function sendContactConfirmationEmail(data: ContactFormData, isEngl
 
   // --- B. PLANTILLA PARA EL EQUIPO INTERNO ---
   const htmlInternal = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #ffffff;">
-      <h2 style="color: #d946ef; border-bottom: 2px solid #d946ef; padding-bottom: 10px;">🎯 Nuevo Lead de Contacto</h2>
+    <div style="font-family: ${fontSans}; max-width: 600px; padding: 0; border: 2px solid #09090B; background-color: #FFFFFF;">
+      <div style="background-color: #E11D48; padding: 20px; color: #FFFFFF;">
+        <h2 style="margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px;">📡 [ NUEVA SEÑAL ENTRANTE: LEAD ]</h2>
+      </div>
       
-      <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; width: 30%; color: #555;"><strong>Nombre:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.nombre_completo}</td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; color: #555;"><strong>Empresa:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.empresa_negocio}</td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; color: #555;"><strong>Email:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${data.correo_electronico}">${data.correo_electronico}</a></td></tr>
-        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; color: #555;"><strong>Teléfono:</strong></td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.telefono}</td></tr>
-      </table>
+      <div style="padding: 30px;">
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid #09090B;">
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; width: 30%; font-size: 13px; font-weight: bold;">Remitente:</td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;">${data.nombre_completo}</td></tr>
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px; font-weight: bold;">Empresa:</td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;">${data.empresa_negocio}</td></tr>
+          <tr><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px; font-weight: bold;">Contacto:</td><td style="padding: 10px; border-bottom: 1px solid #E4E4E7; font-size: 13px;"><a href="mailto:${data.correo_electronico}" style="color: #E11D48;">${data.correo_electronico}</a> <br> ${data.telefono}</td></tr>
+          <tr><td style="padding: 10px; font-size: 13px; font-weight: bold;">Asunto:</td><td style="padding: 10px; font-size: 13px; font-weight: bold; color: #E11D48;">${data.asunto}</td></tr>
+        </table>
 
-      <div style="margin-top: 25px;">
-        <h3 style="color: #333; margin-bottom: 10px;">Mensaje Original:</h3>
-        <div style="white-space: pre-wrap; color: #333; background: #f4f6f8; padding: 15px; border-left: 4px solid #d946ef; border-radius: 4px; font-size: 14px; line-height: 1.6;">${data.mensaje}</div>
+        <div style="margin-top: 30px;">
+          <h3 style="color: #09090B; font-size: 12px; text-transform: uppercase; font-family: ${fontMono}; margin-bottom: 10px;">[ MENSAJE DECAPSULADO ]</h3>
+          <div style="white-space: pre-wrap; color: #09090B; background: #F4F4F5; padding: 20px; border: 1px solid #E4E4E7; font-size: 14px; line-height: 1.6;">${data.mensaje}</div>
+        </div>
       </div>
     </div>
   `;
@@ -199,9 +228,9 @@ export async function sendContactConfirmationEmail(data: ContactFormData, isEngl
       html: htmlClient,
     }),
     resend.emails.send({
-      from: `Web Bot <${FROM_EMAIL}>`,
+      from: `Comms Bot <${FROM_EMAIL}>`,
       to: [INTERNAL_EMAIL],
-      subject: `[LEAD] ${data.asunto} - ${data.empresa_negocio}`,
+      subject: `[ LEAD ] ${data.asunto} - ${data.empresa_negocio}`,
       html: htmlInternal,
     })
   ]);

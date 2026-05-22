@@ -84,7 +84,7 @@ export default function CartPage() {
                       {item.vx_plans?.title || (isEs ? 'Desarrollo a Medida' : 'Custom Development')} 
                     </h3> 
                     <span className="inline-block text-[10px] font-mono opacity-50 uppercase mt-1">
-                      ID_REF: {item.quote_id || item.plan_id || 'SYS_DEFAULT'}
+                      Folio: {item.quote_id || item.plan_id || 'SYS_DEFAULT'}
                     </span>
                   </div>
 

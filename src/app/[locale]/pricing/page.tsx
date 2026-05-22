@@ -24,8 +24,6 @@ export default function CustomPricingPage() {
     monto: 0, 
   });
 
-  
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.monto <= 0) {
@@ -87,13 +85,13 @@ export default function CustomPricingPage() {
           </div>
           
           <div>
-            <label className="block font-mono text-xs font-bold text-[var(--text-main)]/50 mb-2 uppercase">{isEs ? 'Correo Institucional' : 'Institutional Email'}</label>
+            <label className="block font-mono text-xs font-bold text-[var(--text-main)]/50 mb-2 uppercase">{isEs ? 'Correo Electrónico' : 'Email'}</label>
             <input type="email" required value={formData.correo_electronico} onChange={(e) => setFormData({...formData, correo_electronico: e.target.value})} className={inputClass} />
           </div>
 
           <div className="bg-[var(--bg-secondary)] p-6 border-2 border-[var(--text-main)] border-dashed grid sm:grid-cols-2 gap-6 mt-6">
             <div>
-              <label className="block font-mono text-xs font-bold text-[var(--text-main)] mb-2 uppercase">ID_REF (Ej. VX-1024)</label>
+              <label className="block font-mono text-xs font-bold text-[var(--text-main)] mb-2 uppercase">Folio (Ej. VX-1024)</label>
               <input required value={formData.id_cotizacion} onChange={(e) => setFormData({...formData, id_cotizacion: e.target.value.toUpperCase()})} className={`${inputClass} font-bold text-[var(--accent-primary)] tracking-widest`} />
             </div>
             <div>
@@ -106,32 +104,6 @@ export default function CustomPricingPage() {
             {isSubmitting ? <Loader2 className="animate-spin w-5 h-5 mx-auto" /> : <span className="flex items-center gap-2">{isEs ? 'Validar e Inicializar' : 'Validate & Initialize'} <ArrowRight className="w-4 h-4 ml-2"/></span>}
           </button>
         </form>
-        {customPlan && (
-        <div className="mt-24 bg-[var(--text-main)] text-white border-2 border-[var(--text-main)] p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--accent-primary)] flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
-            
-            <div className="mb-8 md:mb-0 max-w-2xl relative z-10">
-              <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-                [ INFRAESTRUCTURA A MEDIDA ]
-              </span>
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase mb-4">
-                {customPlan.title}
-              </h3>
-              <p className="text-white/70 font-mono text-sm leading-relaxed">
-                {customPlan.description}
-              </p>
-            </div>
-
-            <div className="w-full md:w-auto relative z-10 flex flex-col sm:flex-row gap-4">
-              <Link href={`/${locale}/contact`} className="bg-white text-[var(--text-main)] px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-[var(--accent-primary)] hover:text-white transition-colors text-center border-2 border-white hover:border-[var(--accent-primary)]">
-                {isEs ? 'Solicitar Análisis' : 'Request Analysis'}
-              </Link>
-              <Link href={`/${locale}/pricing`} className="bg-transparent border-2 border-white text-white px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-[var(--text-main)] transition-colors text-center">
-                {isEs ? 'Validar ID_REF' : 'Validate REF_ID'}
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );

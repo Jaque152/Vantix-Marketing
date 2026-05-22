@@ -94,7 +94,7 @@ export default async function ServicesCatalogPage({ params }: { params: Promise<
                 {isEs ? 'Solicitar Análisis' : 'Request Analysis'}
               </Link>
               <Link href={`/${locale}/pricing`} className="bg-transparent border-2 border-white text-white px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-[var(--text-main)] transition-colors text-center">
-                {isEs ? 'Validar ID_REF' : 'Validate REF_ID'}
+                {isEs ? 'Folio' : 'Reference ID'}
               </Link>
             </div>
           </div>

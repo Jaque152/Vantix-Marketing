@@ -11,7 +11,7 @@ export default function CancellationPage() {
           <div className="space-y-6 text-[var(--text-main)]/80 leading-relaxed font-medium">
             <div className="bg-white/50 p-6 rounded-2xl mb-8 border border-white/50">
               <p><strong>EKOLUK MKT DIGITAL S.A. DE C.V. • VANTIX MARKETING</strong></p> {/* [cite: 2] */}
-              <p>Portal: draxendigital.com • Línea de Atención:  informacion@vantixmkt.com.com</p> {/* [cite: 2, 3] */}
+              <p>Portal: vantixmkt.com • Línea de Atención:  informacion@vantixmkt.com.com</p> {/* [cite: 2, 3] */}
               <p>Dirección Fiscal: CALLE RÍO GUADIANA NO.23 PISO 2, COL. RENACIMIENTO, ALCALDÍA CUAUHTÉMOC, C.P. 06500 CIUDAD DE MÉXICO, CDMX</p> {/* [cite: 3, 4] */}
               <p>Reglamento vigente desde: Mayo 2026</p> {/* [cite: 4] */}
             </div>
@@ -52,7 +52,7 @@ export default function CancellationPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Fuerza Mayor:</strong> Eventos extraordinarios evaluados individualmente con posibles condiciones preferenciales. {/* [cite: 32] */}</li>
               <li><strong>Modificaciones:</strong> Antes de cancelar, pueden proponerse ajustes de alcance, cronograma o presupuesto. {/* [cite: 33] */}</li>
-              <li><strong>Incumplimiento del Cliente:</strong> VANTIX MARKETING puede suspender el servicio con 15 días de anticipación; reembolso proporcional salvo dolo o mala fe comprobada. {/* [cite: 34, 35] */}</li>
+              <li><strong>Incumplimiento del Cliente:</strong> Vantix Marketing puede suspender el servicio con 15 días de anticipación; reembolso proporcional salvo dolo o mala fe comprobada. {/* [cite: 34, 35] */}</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-[var(--text-main)] mt-8">CONDICIONES ESPECIALES PARA CAMPAÑAS ACTIVAS</h2> {/* [cite: 36] */}
@@ -63,7 +63,7 @@ export default function CancellationPage() {
 
             <h2 className="text-2xl font-bold text-[var(--text-main)] mt-8">POLÍTICA DE SATISFACCIÓN GARANTIZADA</h2> {/* [cite: 39] */}
             <h3 className="text-lg font-bold">Garantía de Calidad</h3> {/* [cite: 40] */}
-            <p>VANTIX MARKETING garantiza cumplimiento de estándares de calidad en propuestas comerciales. Se ofrecen revisiones sin costo hasta alcanzar lo acordado. {/* [cite: 41] */}</p>
+            <p>Vantix Marketing garantiza cumplimiento de estándares de calidad en propuestas comerciales. Se ofrecen revisiones sin costo hasta alcanzar lo acordado. {/* [cite: 41] */}</p>
             <h3 className="text-lg font-bold mt-4">Resolución de Disputas</h3> {/* [cite: 42] */}
             <p>Si no se logra acuerdo, el caso se evaluará por un especialista independiente en publicidad, con honorarios compartidos 50/50. {/* [cite: 43] */}</p>
 

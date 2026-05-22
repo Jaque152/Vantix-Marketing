@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Gauge, Gem, Zap, Target, Share2, LineChart } from 'lucide-react';
 
 export default async function SolucionesPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -47,6 +48,7 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
     <main className="min-h-screen bg-[var(--bg-main)] pt-32 pb-24 text-[var(--text-main)]">
       <div className="container mx-auto px-6 max-w-7xl">
         
+        {/* ENCABEZADO */}
         <div className="mb-20 border-l-4 border-[var(--accent-primary)] pl-6">
           <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
             [ ARSENAL OPERATIVO ]
@@ -59,6 +61,7 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
           </p>
         </div>
 
+        {/* GRID DE SOLUCIONES */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-2 border-[var(--text-main)] bg-white shadow-[12px_12px_0px_0px_var(--text-main)]">
            {soluciones.map((solucion, idx) => (
              <div 
@@ -91,6 +94,35 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
                </div>
              </div>
            ))}
+        </div>
+
+        {/* BLOQUE DE PLAN PERSONALIZADO  */}
+        <div className="mt-24 bg-[var(--text-main)] text-white border-2 border-[var(--text-main)] p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--accent-primary)] flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+          {/* Fondo técnico sutil */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+          
+          <div className="mb-8 md:mb-0 max-w-2xl relative z-10">
+            <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
+              [ INFRAESTRUCTURA A MEDIDA ]
+            </span>
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase mb-4">
+              {isEs ? 'Plan Personalizado' : 'Custom Plan'}
+            </h3>
+            <p className="text-white/70 font-mono text-sm leading-relaxed">
+              {isEs 
+                ? '¿Tu marca requiere un motor con especificaciones únicas? Construimos arquitecturas de adquisición exclusivas adaptadas a los requerimientos técnicos y comerciales de tu organización.' 
+                : 'Does your brand require an engine with unique specifications? We build exclusive acquisition architectures adapted to the technical and commercial requirements of your organization.'}
+            </p>
+          </div>
+
+          <div className="w-full md:w-auto relative z-10 flex flex-col sm:flex-row gap-4">
+            <Link href={`/${locale}/contact`} className="bg-white text-[var(--text-main)] px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-[var(--accent-primary)] hover:text-white transition-colors text-center border-2 border-white hover:border-[var(--accent-primary)]">
+              {isEs ? 'Solicitar Análisis' : 'Request Analysis'}
+            </Link>
+            <Link href={`/${locale}/pricing`} className="bg-transparent border-2 border-white text-white px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-[var(--text-main)] transition-colors text-center">
+              {isEs ? 'Folio' : 'Reference ID'}
+            </Link>
+          </div>
         </div>
 
       </div>

@@ -62,7 +62,7 @@ export default function CheckoutPage() {
   const labelClass = "block font-mono text-[10px] font-bold text-[var(--text-main)]/60 mb-2 uppercase tracking-widest";
   const labelDarkClass = "block font-mono text-[10px] font-bold text-white/60 mb-2 uppercase tracking-widest";
   const inputClass = "h-12 bg-white border-2 border-[var(--text-main)] focus-visible:outline-none focus-visible:border-[var(--accent-primary)] px-4 text-[var(--text-main)] font-mono text-sm placeholder:text-[var(--text-main)]/20 w-full transition-colors rounded-none";
-
+  const darkInputClass = "h-12 bg-transparent border-2 border-white/30 focus-visible:outline-none focus-visible:border-[var(--accent-primary)] px-4 text-white font-mono text-sm placeholder:text-white/30 w-full transition-colors rounded-none";
   if (showSuccess) {
     return (
       <main className="min-h-screen bg-[var(--bg-main)] flex items-center justify-center px-4">
@@ -175,24 +175,24 @@ export default function CheckoutPage() {
                 <div>
                   <label className={labelDarkClass}>{isEs ? 'Número de Tarjeta *' : 'Card Number *'}</label>
                   <div className="relative">
-                    <input placeholder="0000 0000 0000 0000" required maxLength={19} value={cardInfo.number} onChange={(e)=>setCardInfo({...cardInfo, number: e.target.value.replace(/\D/g, '')})} className={inputClass + " bg-transparent border-white/30 text-white placeholder:text-white/20 focus-visible:border-[var(--accent-primary)] font-mono text-lg tracking-widest pl-12"} />
+                    <input placeholder="0000 0000 0000 0000" required maxLength={19} value={cardInfo.number} onChange={(e)=>setCardInfo({...cardInfo, number: e.target.value.replace(/\D/g, '')})} className={darkInputClass + " font-mono text-lg tracking-widest pl-12"} />
                     <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
                   </div>
                 </div>
 
                 <div>
                   <label className={labelDarkClass}>{isEs ? 'Nombre del Titular *' : 'Cardholder Name *'}</label>
-                  <input placeholder="JOHN DOE" required value={cardInfo.name} onChange={(e)=>setCardInfo({...cardInfo, name: e.target.value.toUpperCase()})} className={inputClass + " bg-transparent border-white/30 text-white placeholder:text-white/20 focus-visible:border-[var(--accent-primary)] uppercase"} />
+                  <input placeholder="JOHN DOE" required value={cardInfo.name} onChange={(e)=>setCardInfo({...cardInfo, name: e.target.value.toUpperCase()})} className={darkInputClass + " uppercase"} />
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className={labelDarkClass}>{isEs ? 'Vencimiento *' : 'Expiry Date *'}</label>
-                    <input placeholder="MM/AA" required maxLength={5} value={cardInfo.expiry} onChange={handleExpiryChange} className={inputClass + " bg-transparent border-white/30 text-white text-center placeholder:text-white/20 focus-visible:border-[var(--accent-primary)] font-mono"} />
+                    <input placeholder="MM/AA" required maxLength={5} value={cardInfo.expiry} onChange={handleExpiryChange} className={darkInputClass + " text-center font-mono"} />
                   </div>
                   <div>
                     <label className={labelDarkClass}>{isEs ? 'CVC / CVV *' : 'Security Code *'}</label>
-                    <input placeholder="***" type="password" required maxLength={4} value={cardInfo.cvv} onChange={(e)=>setCardInfo({...cardInfo, cvv: e.target.value.replace(/\D/g, '')})} className={inputClass + " bg-transparent border-white/30 text-white text-center placeholder:text-white/20 focus-visible:border-[var(--accent-primary)] tracking-widest text-lg"} />
+                    <input placeholder="***" type="password" required maxLength={4} value={cardInfo.cvv} onChange={(e)=>setCardInfo({...cardInfo, cvv: e.target.value.replace(/\D/g, '')})} className={darkInputClass + " text-center tracking-widest text-lg"} />
                   </div>
                 </div>
                 

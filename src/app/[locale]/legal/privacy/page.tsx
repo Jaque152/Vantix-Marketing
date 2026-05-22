@@ -11,7 +11,7 @@ export default function PrivacyPage() {
           <div className="space-y-6 text-[var(--text-main)]/80 leading-relaxed font-medium">
             <div className="bg-white/50 p-6 rounded-2xl mb-8 border border-white/50">
               <p><strong>Responsable del Tratamiento: EKOLUK MKT DIGITAL S.A. DE C.V.</strong></p> {/* [cite: 126] */}
-              <p>Portal: draxendigital.com • Comunicaciones:  informacion@vantixmkt.com</p> {/* [cite: 126] */}
+              <p>Portal:vantixmkt.com • Comunicaciones:  informacion@vantixmkt.com</p> {/* [cite: 126] */}
               <p>Domicilio: CALLE RÍO GUADIANA NO.23 PISO 2, COL. RENACIMIENTO, ALCALDÍA CUAUHTÉMOC, C.P. 06500 CIUDAD DE MÉXICO, CDMX</p> {/* [cite: 126, 127] */}
               <p>Documento actualizado: Mayo 2025</p> {/* [cite: 127] */}
             </div>
