@@ -169,6 +169,8 @@ export default function CheckoutPage() {
                   <Lock className="w-4 h-4 text-[var(--accent-primary)]" />
                   <span className="font-mono text-[10px] tracking-widest">SECURE_PAYMENT</span>
                 </div>
+                <img src="/etomin_logo.svg" alt="Etomin" className="h-6 opacity-60 mix-blend-multiply" />
+
               </div>
               
               <div className="grid gap-6 max-w-lg">
