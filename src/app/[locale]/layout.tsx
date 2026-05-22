@@ -5,21 +5,22 @@ import { Navigation } from "@/components/shared/Navigation";
 import { Footer } from "@/components/shared/Footer";
 import { NextIntlClientProvider } from 'next-intl';
 
-import { Playfair_Display, DM_Sans } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-});
+// Nuevas tipografías más técnicas
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm-sans",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+});
+
 export const metadata: Metadata = {
-  title: "Draxen Digital Resultados ",
-  description: "A Draxen Digital agency focused on helping businesses grow with disruptive communication, strategic events, and targeted strategies.",
+  title: "Vantix Marketing ",
+  description: "Estrategias de alto rendimiento y arquitectura de crecimiento para dominar tu mercado digital.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -35,9 +36,9 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   return (
-
-    <html lang={locale} className={`${playfair.variable} ${dmSans.variable} scroll-smooth`}>
-      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col font-sans">
+    <html lang={locale} className={`${dmSans.variable} ${spaceGrotesk.variable} scroll-smooth`}>
+      {/* Eliminamos clases de color en el body para que globals.css mande */}
+      <body className="antialiased min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider locale={locale} messages={{}}>
           <ClientBody>
             <Navigation />

@@ -1,125 +1,119 @@
-import Link from 'next/link';
 import { T } from "@/components/shared/T";
-import { HeroVisuals } from '@/components/home/Hero';
-import { Gauge, Gem, Zap, Target } from 'lucide-react';
-import { AddToCartButton } from './services/AddToCartButton'; 
+import { Activity, ShieldCheck, Zap, Target, ArrowDown } from 'lucide-react';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const isEs = locale === 'es';
 
-  // 1. Datos de los pilares agregados
+  // Datos de los pilares refactorizados
   const pilares = [
     {
-      icono: <Gauge className="w-8 h-8 text-[var(--accent-cyan)]" />,
-      titulo: isEs ? "Estrategia Digital de Alto Rendimiento" : "High-Performance Digital Strategy",
+      id: "01",
+      titulo: isEs ? "Telemetría y Estrategia" : "Telemetry & Strategy",
       texto: isEs 
-        ? "Diseñamos rutas de aceleración precisas y basadas en datos para que tu marca cruce la meta antes que la competencia. Estrategias calibradas para ganar."
-        : "We design precise, data-driven acceleration routes so your brand crosses the finish line before the competition. Strategies calibrated to win.",
-      gradiente: "from-[var(--accent-cyan)]/20 to-transparent"
+        ? "Monitoreo en tiempo real y planificación milimétrica. Diseñamos la ruta óptima para que tu marca alcance la máxima velocidad comercial."
+        : "Real-time monitoring and exact planning. We design the optimal route for your brand to reach maximum commercial velocity.",
     },
     {
-      icono: <Gem className="w-8 h-8 text-[var(--accent-purple)]" />,
-      titulo: isEs ? "Branding e Identidad Visual" : "Branding & Visual Identity",
+      id: "02",
+      titulo: isEs ? "Chasis de Marca" : "Brand Chassis",
       texto: isEs 
-        ? "Forjamos identidades con un diseño imponente y memorable. Haz que tu marca deje una huella profunda y sea reconocida instantáneamente en cualquier pista."
-        : "We forge identities with imposing and memorable design. Make your brand leave a deep mark and be instantly recognized on any track.",
-      gradiente: "from-[var(--accent-purple)]/20 to-transparent"
+        ? "Una identidad estructuralmente impecable. Forjamos el diseño visual que soporta el peso y la presión de un mercado altamente competitivo."
+        : "A structurally flawless identity. We forge the visual design that withstands the weight and pressure of a highly competitive market.",
     },
     {
-      icono: <Zap className="w-8 h-8 text-[var(--accent-magenta)]" />,
-      titulo: isEs ? "Marketing de Contenidos" : "Content Marketing",
+      id: "03",
+      titulo: isEs ? "Distribución Exacta" : "Precision Distribution",
       texto: isEs 
-        ? "El combustible de alto octanaje para tu motor digital. Creamos narrativas ágiles que mantienen a tu audiencia enganchada, activa y leal a tu marca."
-        : "The high-octane fuel for your digital engine. We create agile narratives that keep your audience hooked, active, and loyal to your brand.",
-      gradiente: "from-[var(--accent-magenta)]/20 to-transparent"
+        ? "Contenido calibrado para generar tracción inmediata. Sin fricción, solo impacto directo en tu audiencia objetivo."
+        : "Content calibrated to generate immediate traction. No friction, just direct impact on your target audience.",
     },
     {
-      icono: <Target className="w-8 h-8 text-[var(--accent-cyan)]" />,
-      titulo: isEs ? "Publicidad Pagada (Ads)" : "Paid Advertising (Ads)",
+      id: "04",
+      titulo: isEs ? "Unidad de Potencia" : "Power Unit",
       texto: isEs 
-        ? "Inyectamos energía directa a tus resultados. Campañas altamente innovadoras y segmentadas para maximizar tu retorno de inversión de forma inmediata."
-        : "We inject direct energy into your results. Highly innovative and segmented campaigns to maximize your ROI immediately.",
-      gradiente: "from-[var(--accent-cyan)]/20 to-transparent"
+        ? "Inyectamos capital con eficiencia aerodinámica. Campañas hiper-segmentadas listas para dominar las nuevas regulaciones de los algoritmos."
+        : "We inject capital with aerodynamic efficiency. Hyper-segmented campaigns ready to dominate the new algorithm regulations.",
     }
   ];
 
   return (
-    <main className="flex flex-col min-h-screen bg-mesh overflow-hidden">
+    <main className="flex flex-col min-h-screen bg-[var(--bg-main)] overflow-hidden">
       
-      {/* HERO SECTION - Neobrutalismo Dinámico */}
-      <section className="relative min-h-screen flex items-center pt-24 pb-12">
-        <div className="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* HERO SECTION - TIPOGRAFÍA MONUMENTAL */}
+      <section className="relative h-screen flex flex-col items-center justify-center px-6">
+        {/* Grid de fondo abstracto integrado directamente */}
+        <div className="absolute inset-0 bg-[linear-gradient(var(--card-border)_1px,transparent_1px),linear-gradient(90deg,var(--card-border)_1px,transparent_1px)] bg-[size:100px_100px] opacity-30 pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col items-center text-center w-full max-w-7xl mx-auto mt-16">
+          <p className="text-sm md:text-base font-bold text-[var(--accent-primary)] tracking-[0.3em] uppercase mb-6">
+            {isEs ? 'Sistema de Adquisición Activo' : 'Acquisition System Active'}
+          </p>
+          
+          <h1 className="text-[12vw] sm:text-[10vw] font-bold leading-[0.85] text-[var(--text-main)] tracking-tighter uppercase w-full">
+            <T>Calibramos</T><br />
+            <span className="text-[var(--text-main)]/10 text-transparent stroke-text" style={{ WebkitTextStroke: '2px var(--text-main)' }}>
+              <T>Tu Marca.</T>
+            </span>
+          </h1>
+
+          <div className="mt-16 w-full max-w-2xl mx-auto flex flex-col items-center gap-8">
+            <p className="text-xl md:text-2xl text-[var(--text-main)]/60 font-medium leading-relaxed">
+              {isEs 
+                ? 'Telemetría exacta, arquitectura de datos y estrategias de alta precisión para liderar tu circuito comercial sin fricción.'
+                : 'Exact telemetry, data architecture, and high-precision strategies to lead your commercial circuit without friction.'}
+            </p>
             
-            {/* COLUMNA IZQUIERDA: Copy Disruptivo */}
-            <div className="max-w-2xl relative z-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-[var(--accent-magenta)]/30 mb-8">
-                <span className="w-2 h-2 rounded-full bg-[var(--accent-cyan)] animate-pulse" />
-                <span className="text-sm font-bold text-[var(--text-main)] tracking-wider uppercase">
-                  {isEs ? 'Agencia de Performance' : 'Performance Agency'}
-                </span>
-              </div>
-              
-              <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-bold leading-[1.05] text-[var(--text-main)] mb-8 tracking-tight">
-                <T>Enciende el Motor de</T> <br />
-                <span className="text-gradient-pop"><T>tu Marca.</T></span>
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-[var(--text-main)]/70 mb-12 max-w-xl leading-relaxed font-medium">
-                {isEs 
-                  ? 'Entendemos la publicidad como una máquina de alto rendimiento: requiere calibración exacta, combustible innovador y una ruta definida para cruzar la meta y dominar el mercado.'
-                  : 'We understand advertising as a high-performance machine: it requires exact calibration, innovative fuel, and a defined route to cross the finish line and dominate the market.'}
-              </p>
-
+            {/* Indicador de Scroll en lugar de Botones genéricos */}
+            <div className="flex flex-col items-center gap-3 text-[var(--text-main)]/40 mt-8">
+              <span className="text-xs uppercase tracking-widest font-bold">{isEs ? 'Explorar' : 'Explore'}</span>
+              <ArrowDown className="w-5 h-5 animate-bounce" />
             </div>
-
-            {/* COLUMNA DERECHA: Visuales y Globos Flotantes */}
-            <HeroVisuals locale={locale} />
-
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 4 CILINDROS */}
-      <section className="relative py-24 px-6 border-t border-[var(--text-main)]/10 bg-white/20">
-        <div className="container mx-auto max-w-7xl relative z-10">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--text-main)] tracking-tight">
-              {isEs ? 'Los 4 Cilindros de Nuestro Motor' : 'The 4 Cylinders of Our Engine'}
-            </h2>
-            <p className="text-lg text-[var(--text-main)]/60 max-w-2xl mx-auto font-medium">
-              {isEs 
-                ? 'El rendimiento perfecto no es casualidad. Es el resultado de sincronizar estrategia, identidad, contenido y distribución para que tu marca acelere sin frenos.'
-                : 'Perfect performance is no accident. It is the result of synchronizing strategy, identity, content, and distribution so your brand accelerates without brakes.'}
-            </p>
-          </div>
+      {/* SECCIÓN LA ESCUDERÍA - LISTA TÉCNICA (Cero Tarjetas) */}
+      <section className="relative w-full border-t-4 border-[var(--text-main)] bg-[var(--bg-main)]">
+        {/* Cabecera de la sección */}
+        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[var(--card-border)]">
+          <h2 className="text-3xl md:text-5xl font-bold text-[var(--text-main)] tracking-tighter uppercase">
+            {isEs ? 'Estructura de Rendimiento' : 'Performance Structure'}
+          </h2>
+          <p className="text-sm font-mono text-[var(--accent-primary)] mt-4 md:mt-0">
+            [ SEC.01 — PROTOCOLOS ]
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pilares.map((pilar, index) => (
-              <div 
-                key={index}
-                // 3. Eliminamos motion.div y aplicamos clases de animación nativas de Tailwind CSS
-                className={`glass-panel p-8 rounded-[2rem] border border-white/60 shadow-xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 bg-gradient-to-b ${pilar.gradiente} hover:border-[var(--accent-purple)]/40 animate-in fade-in slide-in-from-bottom-8 fill-mode-both delay-${index * 100}`}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {/* Ícono con contenedor Glass */}
-                <div className="w-16 h-16 rounded-2xl bg-white/60 flex items-center justify-center shadow-sm mb-6 border border-white group-hover:scale-110 transition-transform">
-                  {pilar.icono}
-                </div>
-                
-                <h3 className="text-xl font-bold mb-4 text-[var(--text-main)] leading-tight">
+        {/* Tabla / Lista Estructural */}
+        <div className="max-w-7xl mx-auto w-full">
+          {pilares.map((pilar, index) => (
+            <div 
+              key={index}
+              className="group flex flex-col md:flex-row border-b border-[var(--card-border)] hover:bg-[var(--text-main)] hover:text-white transition-colors duration-300 cursor-default"
+            >
+              {/* ID de la Fila */}
+              <div className="p-6 md:p-12 md:w-1/6 flex items-center md:justify-center border-r-0 md:border-r border-[var(--card-border)] group-hover:border-white/20 transition-colors">
+                <span className="text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-main)]/20 group-hover:text-white/40 transition-colors">
+                  {pilar.id}
+                </span>
+              </div>
+              
+              {/* Título de la Fila */}
+              <div className="p-6 md:p-12 md:w-2/6 flex items-center border-r-0 md:border-r border-[var(--card-border)] group-hover:border-white/20 transition-colors">
+                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">
                   {pilar.titulo}
                 </h3>
-                
-                <p className="text-[var(--text-main)]/70 text-sm font-medium leading-relaxed">
+              </div>
+              
+              {/* Descripción de la Fila */}
+              <div className="p-6 md:p-12 md:w-3/6 flex items-center">
+                <p className="text-lg font-medium leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
                   {pilar.texto}
                 </p>
               </div>
-            ))}
-          </div>
-
+            </div>
+          ))}
         </div>
       </section>
 

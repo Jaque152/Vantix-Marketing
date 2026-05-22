@@ -9,18 +9,16 @@ export default async function ServicesCatalogPage({ params }: { params: Promise<
   const supabase = await createClient();
 
   const { data: plans } = await supabase
-    .from('cb_plans')
+    .from('vx_plans')
     .select('*')
     .eq('is_active', true)
     .order('price', { ascending: true });
 
-  // SOLUCIÓN: Filtro robusto que busca la palabra "personalizado" o "custom" en el título
   const standardPlans = plans?.filter(plan => 
     !plan.title.toLowerCase().includes('personalizado') && 
     !plan.title.toLowerCase().includes('custom')
   ) || [];
 
-  // Buscamos el plan personalizado para el banner inferior
   const customPlan = plans?.find(plan => 
     plan.title.toLowerCase().includes('personalizado') || 
     plan.title.toLowerCase().includes('custom')
@@ -29,97 +27,75 @@ export default async function ServicesCatalogPage({ params }: { params: Promise<
   const formatPrice = (p: number) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(p);
 
   return (
-    <main className="min-h-screen bg-mesh pt-32 pb-24 text-[var(--text-main)] relative">
-      <div className="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10">
+    <main className="min-h-screen bg-[var(--bg-main)] pt-32 pb-24 text-[var(--text-main)]">
+      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
         
-        {/* Cabecera */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-[var(--accent-cyan)]/30 mb-6">
-            <span className="text-[var(--accent-cyan)] uppercase tracking-[0.2em] text-xs font-bold">
-              Fórmulas de Éxito
-            </span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-[var(--text-main)]">
-            El Garage De Opciones
+        <div className="mb-16 border-l-4 border-[var(--accent-primary)] pl-6">
+          <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
+            [ INFRAESTRUCTURA DISPONIBLE ]
+          </span>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-4">
+            {isEs ? 'Catálogo de Protocolos' : 'Protocol Catalog'}
           </h1>
+          <p className="text-[var(--text-main)]/60 font-mono text-sm max-w-2xl">
+            {isEs ? '> Sistemas estandarizados listos para ser desplegados en tu entorno comercial.' : '> Standardized systems ready to be deployed in your commercial environment.'}
+          </p>
         </div>
 
-        {/* Grid de Planes Estándar (Con la info oculta que se revela en Hover) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {standardPlans.map((plan) => (
             <div 
               key={plan.id} 
-              className="glass-panel rounded-3xl p-8 border border-white/50 shadow-xl flex flex-col bg-white/40 relative group h-fit transition-all duration-500 hover:shadow-2xl hover:bg-white/60 hover:-translate-y-2 overflow-hidden"
+              className="bg-white border-2 border-[var(--text-main)] shadow-[6px_6px_0px_0px_var(--text-main)] flex flex-col relative group transition-all duration-300 hover:shadow-[12px_12px_0px_0px_var(--accent-primary)] hover:-translate-y-1"
             >
-              <div className="mb-4 relative z-10">
-                <h3 className="text-2xl font-bold tracking-tight text-[var(--text-main)] mb-2 leading-tight">
+              <div className="p-6 md:p-8 flex-1">
+                <div className="text-[10px] font-mono font-bold text-[var(--text-main)]/40 mb-4 tracking-widest uppercase">ID: {plan.id.split('-')[0]}</div>
+                <h3 className="text-xl font-bold tracking-tight uppercase mb-4 leading-tight group-hover:text-[var(--accent-primary)] transition-colors">
                   {plan.title}
                 </h3>
-                
-                {/* REVELACIÓN AL PASAR EL CURSOR (Hover Reveal) */}
-                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100">
-                  <div className="overflow-hidden">
-                    <p className="text-[var(--text-main)]/70 font-medium text-[13px] leading-relaxed pt-2 pb-4">
-                      {plan.description}
-                    </p>
-                  </div>
-                </div>
+                <p className="text-[var(--text-main)]/70 font-medium text-sm leading-relaxed mb-6">
+                  {plan.description}
+                </p>
               </div>
 
-              <div className="mt-auto pt-6 border-t border-[var(--text-main)]/10 flex items-end justify-between relative z-10">
+              <div className="p-6 bg-[var(--bg-secondary)] border-t-2 border-[var(--text-main)] flex items-center justify-between">
                 <div>
-                  <span className="text-2xl font-bold text-[var(--text-main)] block mb-1 tracking-tight">
+                  <span className="text-xl font-bold block tracking-tighter">
                     {formatPrice(plan.price)}
                   </span>
-                  <span className="text-[10px] text-[var(--text-main)]/50 font-bold uppercase tracking-widest">
+                  <span className="text-[10px] text-[var(--text-main)]/50 font-bold uppercase tracking-widest font-mono">
                     MXN + IVA
                   </span>
                 </div>
-                
-                <div className="relative z-20">
-                  <AddToCartButton planId={plan.id} />
-                </div>
+                <AddToCartButton planId={plan.id} />
               </div>
             </div>
           ))}
         </div>
 
-        {/* SECCIÓN PLAN PERSONALIZADO (Separado y Premium) */}
         {customPlan && (
-          <div className="mt-20 glass-panel rounded-[2.5rem] p-10 md:p-14 border border-[var(--accent-cyan)] shadow-2xl flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-white/60 to-[var(--accent-cyan)]/10 relative overflow-hidden group">
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--accent-cyan)]/20 rounded-full blur-[80px] pointer-events-none transition-all duration-500 group-hover:scale-150" />
+          <div className="mt-24 bg-[var(--text-main)] text-white border-2 border-[var(--text-main)] p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--accent-primary)] flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
             
             <div className="mb-8 md:mb-0 max-w-2xl relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 border border-[var(--accent-cyan)]/30 mb-4">
-                <span className="text-[var(--accent-cyan)] uppercase tracking-[0.2em] text-xs font-bold">Exclusivo</span>
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-main)] mb-4 leading-tight">
+              <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
+                [ INFRAESTRUCTURA A MEDIDA ]
+              </span>
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase mb-4">
                 {customPlan.title}
               </h3>
-              <p className="text-[var(--text-main)]/70 font-medium text-lg leading-relaxed">
+              <p className="text-white/70 font-mono text-sm leading-relaxed">
                 {customPlan.description}
               </p>
             </div>
 
-            <div className="w-full md:w-auto relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              {/* Botón Primario: Iniciar Cotización */}
-              <Link 
-                href={`/${locale}/contact`} 
-                className="w-full sm:w-auto bg-[var(--accent-dark)] text-white px-8 md:px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] transition-all flex items-center justify-center gap-3"
-              >
-                {isEs ? 'Iniciar Cotización' : 'Start Quote'}
-                <ArrowRight className="w-6 h-6" />
+            <div className="w-full md:w-auto relative z-10 flex flex-col sm:flex-row gap-4">
+              <Link href={`/${locale}/contact`} className="bg-white text-[var(--text-main)] px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-[var(--accent-primary)] hover:text-white transition-colors text-center border-2 border-white hover:border-[var(--accent-primary)]">
+                {isEs ? 'Solicitar Análisis' : 'Request Analysis'}
               </Link>
-
-              {/* Botón Secundario: Pagar Cotización */}
-              <Link 
-                href={`/${locale}/pricing`} 
-                className="w-full sm:w-auto bg-white/5 backdrop-blur-md border border-[var(--accent-cyan)] text-[var(--text-main)] px-8 md:px-10 py-5 rounded-2xl font-bold text-lg hover:bg-[var(--accent-cyan)] hover:text-[var(--accent-dark)] hover:scale-105 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all flex items-center justify-center gap-3"
-              >
-                {isEs ? 'Pagar Cotización' : 'Pay Quote'}
-                <ArrowRight className="w-6 h-6" />
+              <Link href={`/${locale}/pricing`} className="bg-transparent border-2 border-white text-white px-8 py-4 font-bold tracking-widest uppercase text-xs hover:bg-white hover:text-[var(--text-main)] transition-colors text-center">
+                {isEs ? 'Validar ID_REF' : 'Validate REF_ID'}
               </Link>
-              
             </div>
           </div>
         )}

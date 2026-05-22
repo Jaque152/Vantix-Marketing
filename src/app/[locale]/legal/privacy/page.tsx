@@ -11,13 +11,13 @@ export default function PrivacyPage() {
           <div className="space-y-6 text-[var(--text-main)]/80 leading-relaxed font-medium">
             <div className="bg-white/50 p-6 rounded-2xl mb-8 border border-white/50">
               <p><strong>Responsable del Tratamiento: EKOLUK MKT DIGITAL S.A. DE C.V.</strong></p> {/* [cite: 126] */}
-              <p>Portal: draxendigital.com • Comunicaciones: info@draxendigital.com</p> {/* [cite: 126] */}
+              <p>Portal: draxendigital.com • Comunicaciones:  informacion@vantixmkt.com</p> {/* [cite: 126] */}
               <p>Domicilio: CALLE RÍO GUADIANA NO.23 PISO 2, COL. RENACIMIENTO, ALCALDÍA CUAUHTÉMOC, C.P. 06500 CIUDAD DE MÉXICO, CDMX</p> {/* [cite: 126, 127] */}
               <p>Documento actualizado: Mayo 2025</p> {/* [cite: 127] */}
             </div>
 
             <h2 className="text-2xl font-bold text-[var(--text-main)] mt-8">NUESTRA FILOSOFÍA DE PRIVACIDAD</h2> {/* [cite: 128] */}
-            <p>DRAXEN DIGITAL opera bajo la premisa de que cada cliente merece transparencia absoluta sobre cómo su información personal impulsa el éxito de su marca. Como especialistas en publicidad que creemos en la precisión, el combustible creativo y la dirección clara, aplicamos estos mismos principios al cuidado de sus datos personales, cumpliendo rigurosamente con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares. {/* [cite: 129, 130] */}</p>
+            <p>VANTIX MARKETING opera bajo la premisa de que cada cliente merece transparencia absoluta sobre cómo su información personal impulsa el éxito de su marca. Como especialistas en publicidad que creemos en la precisión, el combustible creativo y la dirección clara, aplicamos estos mismos principios al cuidado de sus datos personales, cumpliendo rigurosamente con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares. {/* [cite: 129, 130] */}</p>
 
             <h2 className="text-2xl font-bold text-[var(--text-main)] mt-8">TIPOS DE INFORMACIÓN QUE RECOLECTAMOS</h2> {/* [cite: 131] */}
             <h3 className="text-lg font-bold">Información Personal y Empresarial</h3> {/* [cite: 132] */}
@@ -91,8 +91,8 @@ export default function PrivacyPage() {
             <p>Esta política puede ser modificada para reflejar cambios en operación, servicios, leyes o estándares de privacidad. Se notificará con 7 días hábiles de anticipación en nuestro sitio web y por correo electrónico. {/* [cite: 179, 180] */}</p>
 
             <h2 className="text-2xl font-bold text-[var(--text-main)] mt-8">CANAL DE QUEJAS Y DENUNCIAS</h2> {/* [cite: 181] */}
-            <p>Para asuntos no resueltos con DRAXEN DIGITAL, puede contactar al INAI en www.inai.org.mx o al teléfono 800 835 4324. {/* [cite: 182] */}</p>
-            <p className="font-bold text-center mt-8 text-[var(--accent-purple)]">EKOLUK MKT DIGITAL S.A. DE C.V. • DRAXEN DIGITAL <br/> Arrancamos tu marca con la máxima protección de tus datos {/* [cite: 182, 183] */}</p>
+            <p>Para asuntos no resueltos con VANTIX MARKETING, puede contactar al INAI en www.inai.org.mx o al teléfono 800 835 4324. {/* [cite: 182] */}</p>
+            <p className="font-bold text-center mt-8 text-[var(--accent-purple)]">EKOLUK MKT DIGITAL S.A. DE C.V. • VANTIX MARKETING <br/> Arrancamos tu marca con la máxima protección de tus datos {/* [cite: 182, 183] */}</p>
 
           </div>
         </div>

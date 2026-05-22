@@ -15,7 +15,7 @@ function requireEnvVar(name: string): string {
 const getEtominHeaders = (extraHeaders = {}) => ({
   'Content-Type': 'application/json',
   'Accept': 'application/json',
-  'User-Agent': 'Draxen Digital Recursos/1.0',
+  'User-Agent': 'VANTIX MARKETING Recursos/1.0',
   ...extraHeaders
 });
 
@@ -99,8 +99,8 @@ export async function processCheckout(formData: CheckoutPayload) {
         cvv: cardInfo.cvv
       },
       items: items.map((i: CartItem) => ({
-        title: i.cb_plans?.title || 'Estrategia Personalizada',
-        amount: Number((i.custom_price !== null ? i.custom_price : (i.cb_plans?.price || 0)).toFixed(2)),
+        title: i.vx_plans?.title || 'Estrategia Personalizada',
+        amount: Number((i.custom_price !== null ? i.custom_price : (i.vx_plans?.price || 0)).toFixed(2)),
         quantity: i.quantity,
         id: i.plan_id.toString() // RESTAURADO: Mandamos el UUID completo sin recortar
       }))
@@ -122,7 +122,7 @@ export async function processCheckout(formData: CheckoutPayload) {
 
     // 4. GUARDAR EN BD
     const { data: checkoutRecord, error: dbError } = await supabaseAdmin
-      .from('cb_orders')
+      .from('vx_orders')
       .insert({
         nombre: contactInfo.firstName,
         apellidos: contactInfo.lastName,
@@ -155,7 +155,7 @@ export async function processCheckout(formData: CheckoutPayload) {
       quote_id: item.quote_id
     }));
 
-    const { error: itemsError } = await supabaseAdmin.from('cb_order_items').insert(checkoutItems);
+    const { error: itemsError } = await supabaseAdmin.from('vx_order_items').insert(checkoutItems);
     if (itemsError) console.error("[CRÍTICO] Detalle del error en Items:", itemsError);
 
     // 6. ENVIAR CORREO

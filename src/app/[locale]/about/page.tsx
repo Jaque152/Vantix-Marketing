@@ -1,83 +1,93 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { useLocale } from "next-intl";
-import Link from "next/link";
 
 export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const locale = useLocale();
   const isEs = locale === 'es';
 
-
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="relative py-32 overflow-hidden bg-mesh min-h-screen"
-    >
+    <section className="relative pt-32 pb-24 overflow-hidden bg-[var(--bg-main)] min-h-screen">
+      {/* Grid de fondo técnico */}
+      <div className="absolute inset-0 bg-[linear-gradient(var(--card-border)_1px,transparent_1px),linear-gradient(90deg,var(--card-border)_1px,transparent_1px)] bg-[size:60px_60px] opacity-40 pointer-events-none" />
+      
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-[var(--accent-purple)]/30 mb-6">
-            <span className="text-[var(--accent-purple)] uppercase tracking-[0.2em] text-xs font-bold">
-              {isEs ? 'Sobre Nosotros' : 'About Us'}
-            </span>
+        {/* BLOQUE 1: EL MANIFIESTO (Bloque de texto enorme, sin columnas) */}
+        <div className="mb-32">
+          <div className="inline-block bg-[var(--text-main)] text-white px-4 py-1 mb-8 font-mono text-xs uppercase tracking-[0.2em]">
+            [ INITIALIZING_CORE_SYSTEMS ]
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-main)] max-w-3xl leading-[1.1] tracking-tight">
-            Draxen Digital.{" "}
-            <span className="text-gradient-pop block mt-2">
-              {isEs ? 'Elevando el Potencial de tu Negocio.' : 'Elevating Your Business Potential.'}
+          
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-main)] leading-[0.9] tracking-tighter uppercase mb-12">
+            No somos una agencia.<br/>
+            <span className="text-transparent stroke-text opacity-50" style={{ WebkitTextStroke: '2px var(--text-main)' }}>
+              {isEs ? 'Somos Ingeniería de Crecimiento.' : 'We are Growth Engineering.'}
             </span>
           </h2>
-        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8 glass-panel p-8 md:p-12 rounded-3xl"
-          >
-            <h3 className="text-3xl font-bold text-[var(--text-main)]">
-              {isEs ? 'Nuestro Laboratorio de Ensamblaje' : 'Our Assembly Lab'}
-            </h3>
-            <div className="space-y-6 text-lg text-[var(--text-main)]/70 leading-relaxed font-medium text-justify">
-              <p>
-                {isEs ? 'Cada marca es una máquina con un ADN distinto. Desde la conceptualización visual hasta el despliegue digital, nuestro equipo afina cada engranaje para que tu proyecto acelere con fuerza y distinción.' : 'Every brand is a machine with a distinct DNA. From visual conceptualization to digital deployment, our team fine-tunes every gear so your project accelerates with strength and distinction.'}
-              </p>
-              <p>
-                {isEs ? 'No usamos plantillas de fábrica; construimos motores de crecimiento adaptados al terreno de tu industria. Nuestra pasión es fusionar la creatividad estética con analítica pura para generar métricas que rompen los límites de velocidad.' : 'We don’t use factory templates; we build growth engines adapted to the terrain of your industry. Our passion is fusing aesthetic creativity with pure analytics to generate metrics that break speed limits.'}
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-8"
-          >
-            <div className="relative pl-8 border-l-4 border-[var(--accent-cyan)]">
-              <h3 className="text-3xl font-bold text-[var(--text-main)] mb-6 tracking-tight">
-                {isEs ? 'De Motor a Pista' : 'From Engine to Track'}
-              </h3>
-              <ul className="space-y-6 text-[var(--text-main)]/70 leading-relaxed font-medium">
-                <li><strong className="text-[var(--text-main)]">1. Diagnóstico de Telemetría:</strong> {isEs ? 'Inspeccionamos el estado actual de tu marca y trazamos la ruta más eficiente.' : 'We inspect the current state of your brand and map out the most efficient route.'}</li>
-                <li><strong className="text-[var(--text-main)]">2. Ingeniería y Trazado:</strong> {isEs ? 'Ensamblamos tácticas personalizadas uniendo creatividad con tecnología de punta.' : 'We assemble custom tactics uniting creativity with cutting-edge technology.'}</li>
-                <li><strong className="text-[var(--text-main)]">3. Arranque Oficial:</strong> {isEs ? 'Desplegamos activos visuales y campañas calibradas para conectar con tu público.' : 'We deploy visual assets and calibrated campaigns to connect with your audience.'}</li>
-                <li><strong className="text-[var(--text-main)]">4. Calibración Continua:</strong> {isEs ? 'Monitoreamos los tiempos de vuelta, ajustando tu estrategia para exprimir el máximo rendimiento.' : 'We monitor lap times, adjusting your strategy to squeeze out maximum performance.'}</li>
-              </ul>
-            </div>
-          </motion.div>
+          <div className="max-w-4xl text-xl sm:text-3xl text-[var(--text-main)] font-medium leading-tight text-justify border-l-8 border-[var(--accent-primary)] pl-8 py-2">
+            {isEs 
+              ? 'Rechazamos las plantillas prefabricadas y la creatividad sin propósito. Entendemos tu marca como un sistema complejo: calibramos la aerodinámica visual, estructuramos la telemetría de tus datos y construimos motores de adquisición diseñados específicamente para romper los límites de velocidad de tu mercado.' 
+              : 'We reject prefabricated templates and purposeless creativity. We understand your brand as a complex system: we calibrate visual aerodynamics, structure your data telemetry, and build acquisition engines designed specifically to break your market\'s speed limits.'}
+          </div>
         </div>
+
+        {/* BLOQUE 2: PIPELINE HORIZONTAL (Rompiendo la lista vertical clásica) */}
+        <div className="w-full">
+          <h3 className="text-2xl font-bold text-[var(--text-main)] uppercase tracking-widest mb-12 border-b-4 border-[var(--text-main)] pb-4 inline-block">
+            {isEs ? 'Pipeline de Ejecución' : 'Execution Pipeline'}
+          </h3>
+
+          <div className="grid md:grid-cols-4 gap-0 border-2 border-[var(--text-main)] bg-white shadow-[12px_12px_0px_0px_var(--text-main)]">
+            
+            {/* Paso 1 */}
+            <div className="p-8 border-b-2 md:border-b-0 md:border-r-2 border-[var(--text-main)] hover:bg-[var(--accent-primary)] hover:text-white transition-colors group">
+              <span className="block text-5xl font-bold opacity-20 mb-6 font-mono group-hover:opacity-100">01</span>
+              <h4 className="text-lg font-bold uppercase tracking-tight mb-4">{isEs ? 'Diagnóstico' : 'Diagnostics'}</h4>
+              <p className="text-sm font-medium opacity-80 leading-relaxed">
+                {isEs 
+                  ? 'Extracción de telemetría inicial. Mapeamos tu infraestructura actual para encontrar los cuellos de botella comerciales.' 
+                  : 'Initial telemetry extraction. We map your current infrastructure to find commercial bottlenecks.'}
+              </p>
+            </div>
+
+            {/* Paso 2 */}
+            <div className="p-8 border-b-2 md:border-b-0 md:border-r-2 border-[var(--text-main)] hover:bg-[var(--accent-primary)] hover:text-white transition-colors group">
+              <span className="block text-5xl font-bold opacity-20 mb-6 font-mono group-hover:opacity-100">02</span>
+              <h4 className="text-lg font-bold uppercase tracking-tight mb-4">{isEs ? 'Ingeniería' : 'Engineering'}</h4>
+              <p className="text-sm font-medium opacity-80 leading-relaxed">
+                {isEs 
+                  ? 'Diseño del chasis. Ensamblamos los sistemas visuales y técnicos necesarios para soportar el alto rendimiento.' 
+                  : 'Chassis design. We assemble the visual and technical systems needed to support high performance.'}
+              </p>
+            </div>
+
+            {/* Paso 3 */}
+            <div className="p-8 border-b-2 md:border-b-0 md:border-r-2 border-[var(--text-main)] hover:bg-[var(--accent-primary)] hover:text-white transition-colors group">
+              <span className="block text-5xl font-bold opacity-20 mb-6 font-mono group-hover:opacity-100">03</span>
+              <h4 className="text-lg font-bold uppercase tracking-tight mb-4">{isEs ? 'Despliegue' : 'Deployment'}</h4>
+              <p className="text-sm font-medium opacity-80 leading-relaxed">
+                {isEs 
+                  ? 'Arranque oficial. Inyectamos capital y lanzamos las campañas al circuito bajo protocolos estrictos.' 
+                  : 'Official launch. We inject capital and launch campaigns onto the circuit under strict protocols.'}
+              </p>
+            </div>
+
+            {/* Paso 4 */}
+            <div className="p-8 hover:bg-[var(--text-main)] hover:text-white transition-colors group">
+              <span className="block text-5xl font-bold opacity-20 mb-6 font-mono text-[var(--accent-primary)] group-hover:opacity-100 group-hover:text-[var(--accent-primary)]">04</span>
+              <h4 className="text-lg font-bold uppercase tracking-tight mb-4">{isEs ? 'Calibración' : 'Calibration'}</h4>
+              <p className="text-sm font-medium opacity-80 leading-relaxed">
+                {isEs 
+                  ? 'Monitoreo en tiempo real. Ajustes micro-milimétricos para asegurar el dominio absoluto del mercado.' 
+                  : 'Real-time monitoring. Micro-millimetric adjustments to ensure absolute market dominance.'}
+              </p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
   );

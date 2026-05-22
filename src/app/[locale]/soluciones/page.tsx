@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Gauge, Gem, Zap, Target, Share2, LineChart, ArrowRight } from 'lucide-react';
+import { Gauge, Gem, Zap, Target, Share2, LineChart } from 'lucide-react';
 
 export default async function SolucionesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -7,85 +6,88 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
 
   const soluciones = [
     {
-      icono: <Gauge className="w-10 h-10 text-[var(--accent-cyan)]" />,
-      titulo: "Estrategia digital: Ferrari",
-      resumen: "Velocidad y precisión para alcanzar la meta en tiempo récord mediante análisis de mercado y planes disruptivos.",
-      texto: "Comenzamos analizando tu mercado, competencia y audiencia para identificar oportunidades. Diseñamos estrategias multicanal que combinan redes sociales, publicidad pagada, marketing de contenidos y SEO. Con Ferrari, tu marca toma la delantera en la carrera digital, aumentando visibilidad y engagement de manera sostenida."
+      icono: <Gauge className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Planificación de Telemetría" : "Telemetry Planning",
+      resumen: isEs ? "Rutas estratégicas para alcanzar objetivos basados en datos." : "Strategic routes to achieve data-driven goals.",
+      texto: isEs ? "Analizamos el mercado y la competencia. Diseñamos tácticas multicanal que combinan redes, publicidad pagada y SEO para que tu marca tome la delantera de manera sostenida." : "We analyze market and competition. We design multichannel tactics combining social, paid ads, and SEO so your brand takes the lead sustainably."
     },
     {
-      icono: <Gem className="w-10 h-10 text-[var(--accent-purple)]" />,
-      titulo: "Branding y diseño: Lamborghini",
-      resumen: "Poder visual y elegancia. Construimos identidades que reflejan la esencia y personalidad única de tu empresa.",
-      texto: "Creamos identidades visuales completas: logotipos, paletas de color, tipografía y manuales de marca. Fusionamos creatividad y estrategia para construir una narrativa visual que conecte emocionalmente. Tu marca se convierte en un símbolo de reconocimiento y diferenciación duradera."
+      icono: <Gem className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Arquitectura Visual" : "Visual Architecture",
+      resumen: isEs ? "Sistemas de diseño estructurados y memorables." : "Structured and memorable design systems.",
+      texto: isEs ? "Construimos identidades completas: logos, colorimetría y manuales operativos. Fusionamos ingeniería visual con narrativa para conectar emocionalmente y diferenciarte en el circuito." : "We build complete identities: logos, colorimetry, and operational manuals. We fuse visual engineering with narrative to connect emotionally."
     },
     {
-      icono: <Zap className="w-10 h-10 text-[var(--accent-magenta)]" />,
-      titulo: "Marketing de contenidos: Porsche",
-      resumen: "Combustible de alta calidad. Contenido ágil y eficiente enfocado en atraer, educar y fidelizar a tu audiencia.",
-      texto: "Creamos blogs, newsletters, videos e infografías que transmiten mensajes claros. Aplicamos storytelling y técnicas de SEO para optimizar el alcance. Monitoreamos métricas de rendimiento y ajustamos estrategias para mejorar continuamente la eficacia de tus acciones."
+      icono: <Zap className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Motor de Contenidos" : "Content Engine",
+      resumen: isEs ? "Distribución de activos que fidelizan y educan." : "Asset distribution that builds loyalty and educates.",
+      texto: isEs ? "Desplegamos activos de alto impacto (blogs, videos, infografías). Aplicamos técnicas SEO y monitoreamos métricas de rendimiento para calibrar continuamente la eficacia del despliegue." : "We deploy high-impact assets (blogs, videos). We apply SEO techniques and monitor performance metrics to continuously calibrate deployment efficiency."
     },
     {
-      icono: <Target className="w-10 h-10 text-[var(--accent-cyan)]" />,
-      titulo: "Publicidad pagada: Tesla",
-      resumen: "Energía innovadora y precisa. Maximizamos el retorno de inversión con segmentación exacta y conversiones inmediatas.",
-      texto: "Campañas en Google Ads, Facebook e Instagram diseñadas para generar resultados medibles. Aplicamos pruebas A/B y estrategias de remarketing para ajustar anuncios en tiempo real. Tu marca acelera su alcance atrayendo clientes de forma inmediata y sostenible."
+      icono: <Target className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Inyección de Tráfico (Ads)" : "Traffic Injection (Ads)",
+      resumen: isEs ? "Segmentación algorítmica para conversión inmediata." : "Algorithmic targeting for immediate conversion.",
+      texto: isEs ? "Campañas de alto rendimiento en motores de búsqueda y redes sociales. Aplicamos pruebas A/B y remarketing en tiempo real para maximizar el retorno de inversión de tu capital." : "High-performance campaigns on search engines and social networks. We apply A/B testing and remarketing in real time to maximize ROI."
     },
     {
-      icono: <Share2 className="w-10 h-10 text-[var(--accent-purple)]" />,
-      titulo: "Gestión de redes sociales: Bugatti",
-      resumen: "Estilo y velocidad en el circuito social. Fomentamos el crecimiento de comunidad y relaciones auténticas.",
-      texto: "Gestionamos tus plataformas con precisión. Creamos calendarios de contenido, publicamos material creativo y respondemos a la audiencia estratégicamente. Adaptamos cada publicación al tono de tu marca, garantizando consistencia y relevancia en todos los canales."
+      icono: <Share2 className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Control de Ecosistema Social" : "Social Ecosystem Control",
+      resumen: isEs ? "Crecimiento sistemático de comunidades digitales." : "Systematic growth of digital communities.",
+      texto: isEs ? "Gestionamos canales sociales con precisión milimétrica. Publicamos material calibrado al tono de tu marca, garantizando consistencia y respuestas estratégicas a tu comunidad." : "We manage social channels with pinpoint accuracy. We publish material calibrated to your brand's tone, ensuring consistency and strategic responses."
     },
     {
-      icono: <LineChart className="w-10 h-10 text-[var(--accent-magenta)]" />,
-      titulo: "Análisis y optimización: Jeep",
-      resumen: "Resistencia en cualquier terreno. Supervisamos y ajustamos cada acción para garantizar un rendimiento estable.",
-      texto: "Analizamos métricas de campañas y resultados generales para mejorar continuamente. Identificamos oportunidades de mejora y optimizamos recursos. Tu estrategia digital se vuelve flexible y resistente, lista para superar cualquier desafío del mercado."
+      icono: <LineChart className="w-8 h-8 text-[var(--text-main)] group-hover:text-white transition-colors" />,
+      titulo: isEs ? "Calibración Continua" : "Continuous Calibration",
+      resumen: isEs ? "Supervisión de métricas y ajustes en tiempo real." : "Metrics supervision and real-time adjustments.",
+      texto: isEs ? "Auditoría constante de campañas. Identificamos cuellos de botella y optimizamos recursos. Hacemos que tu sistema comercial sea flexible y resistente a los cambios del algoritmo." : "Constant campaign auditing. We identify bottlenecks and optimize resources. We make your commercial system flexible and resistant to algorithm changes."
     }
   ];
 
   return (
-    <main className="min-h-screen bg-mesh pt-32 pb-24 text-[var(--text-main)] relative">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+    <main className="min-h-screen bg-[var(--bg-main)] pt-32 pb-24 text-[var(--text-main)]">
+      <div className="container mx-auto px-6 max-w-7xl">
         
-        {/* Encabezado */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-[var(--accent-purple)]/30 mb-6">
-            <span className="text-[var(--accent-purple)] uppercase tracking-[0.2em] text-xs font-bold">Portafolio Estratégico</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-[var(--text-main)]">Soluciones a Tu Medida</h1>
-          <p className="text-xl text-[var(--text-main)]/70 max-w-3xl mx-auto font-medium">
-            Ingeniería de alto rendimiento. Pasa el cursor sobre cada solución para conocer los detalles del motor.
+        <div className="mb-20 border-l-4 border-[var(--accent-primary)] pl-6">
+          <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
+            [ ARSENAL OPERATIVO ]
+          </span>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter uppercase">
+            {isEs ? 'Sistemas a Medida' : 'Custom Systems'}
+          </h1>
+          <p className="text-[var(--text-main)]/60 font-mono text-sm max-w-2xl">
+            {isEs ? '> Ingeniería de alto rendimiento para cada fase de adquisición.' : '> High-performance engineering for each acquisition phase.'}
           </p>
         </div>
 
-        {/* Grid de Soluciones con Efecto Hover Expandible */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-2 border-[var(--text-main)] bg-white shadow-[12px_12px_0px_0px_var(--text-main)]">
            {soluciones.map((solucion, idx) => (
              <div 
                key={idx} 
-               className="group glass-panel p-8 rounded-3xl border border-white/50 hover:border-[var(--accent-cyan)]/50 transition-all duration-500 bg-white/40 shadow-xl flex flex-col h-fit"
+               className="group p-8 border-b-2 md:border-b-0 md:border-r-2 border-[var(--text-main)] hover:bg-[var(--accent-primary)] hover:text-white transition-colors h-full flex flex-col"
+               style={{
+                 borderBottomWidth: idx < 3 ? '2px' : '0px', 
+                 borderRightWidth: (idx + 1) % 3 !== 0 ? '2px' : '0px'
+               }}
              >
-               <div className="mb-6 bg-white/50 w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm border border-white/60 group-hover:scale-110 transition-transform duration-500">
-                 {solucion.icono}
+               <div className="mb-6 flex justify-between items-start">
+                 <div className="w-14 h-14 bg-[var(--bg-secondary)] flex items-center justify-center border-2 border-[var(--text-main)] group-hover:bg-[var(--text-main)] group-hover:border-[var(--text-main)] transition-colors">
+                   {solucion.icono}
+                 </div>
+                 <span className="font-mono text-xs font-bold opacity-30 group-hover:opacity-100">MOD.0{idx + 1}</span>
                </div>
                
-               <h3 className="text-2xl font-bold mb-3 text-[var(--text-main)] tracking-tight group-hover:text-[var(--accent-cyan)] transition-colors">
+               <h3 className="text-xl font-bold mb-3 tracking-tight uppercase">
                  {solucion.titulo}
                </h3>
 
-               {/* Resumen siempre visible */}
-               <p className="text-[var(--text-main)]/80 text-sm leading-relaxed font-bold mb-2">
+               <p className="text-[var(--accent-primary)] group-hover:text-white font-mono text-xs uppercase tracking-widest mb-4">
                  {solucion.resumen}
                </p>
 
-               {/* INFO COMPLETA: Solo visible en Hover */}
-               <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100">
-                 <div className="overflow-hidden">
-                   <p className="text-[var(--text-main)]/60 text-sm leading-relaxed pt-4 border-t border-[var(--text-main)]/10 mt-4 text-justify font-medium">
-                     {solucion.texto}
-                   </p>
-                 </div>
+               <div className="mt-auto pt-4 border-t-2 border-dashed border-[var(--text-main)]/20 group-hover:border-white/20">
+                 <p className="opacity-80 text-sm leading-relaxed font-medium">
+                   {solucion.texto}
+                 </p>
                </div>
              </div>
            ))}
