@@ -91,7 +91,7 @@ export const translatePlanDescription = (
     "Realizamos estudios profundos de tu industria y competidores para identificar oportunidades y amenazas.":
       "We conduct in-depth studies of your industry and competitors to identify opportunities and threats.",
 
-    "Diseñamos estrategias personalizadas que alinean tus objetivos comerciales con las tendencias del mercado digital.":
+    "Cotización a medida":
       "We design personalized strategies that align your business goals with digital market trends.",
   };
 
