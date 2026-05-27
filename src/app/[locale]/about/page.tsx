@@ -16,7 +16,7 @@ export default function About() {
         {/* BLOQUE 1: EL MANIFIESTO (Bloque de texto enorme, sin columnas) */}
         <div className="mb-32">
           <div className="inline-block bg-[var(--text-main)] text-white px-4 py-1 mb-8 font-mono text-xs uppercase tracking-[0.2em]">
-            [ INITIALIZING_CORE_SYSTEMS ]
+            {isEs? '[ INICIALIZANDO_SISTEMAS_CENTRALES ]':'[ INITIALIZING_CORE_SYSTEMS ]'}
           </div>
           
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-main)] leading-[0.9] tracking-tighter uppercase mb-12">

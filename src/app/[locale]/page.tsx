@@ -81,7 +81,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {isEs ? 'Estructura de Rendimiento' : 'Performance Structure'}
           </h2>
           <p className="text-sm font-mono text-[var(--accent-primary)] mt-4 md:mt-0">
-            [ SEC.01 — PROTOCOLOS ]
+            {isEs? '[ SEC.01 — PROTOCOLOS ]':'[ SEC.01 — PROTOCOLS ]'}
           </p>
         </div>
 

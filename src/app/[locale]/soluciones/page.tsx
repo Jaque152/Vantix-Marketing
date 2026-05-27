@@ -51,7 +51,7 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
         {/* ENCABEZADO */}
         <div className="mb-20 border-l-4 border-[var(--accent-primary)] pl-6">
           <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-            [ ARSENAL OPERATIVO ]
+            {isEs ? '[ ARSENAL OPERATIVO ]' : '[ OPERATIONAL ARSENAL ]'}
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter uppercase">
             {isEs ? 'Sistemas a Medida' : 'Custom Systems'}

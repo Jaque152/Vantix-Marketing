@@ -69,7 +69,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="mb-12 border-l-4 border-[var(--accent-primary)] pl-6">
           <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-            [ SEC.03 — COMUNICACIÓN ]
+            {isEs? '[ SEC.03 — COMUNICACIÓN ]':'[ SEC.03 — COMMUNICATION ]'}
           </span>
           <h1 className="text-4xl md:text-6xl font-bold text-[var(--text-main)] tracking-tighter uppercase">
             {isEs ? 'Centro de Comando' : 'Command Center'}

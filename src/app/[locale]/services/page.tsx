@@ -31,7 +31,7 @@ export default async function ServicesCatalogPage({ params }: { params: Promise<
         
         <div className="mb-16 border-l-4 border-[var(--accent-primary)] pl-6">
           <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-            [ INFRAESTRUCTURA DISPONIBLE ]
+            {isEs? '[ INFRAESTRUCTURA DISPONIBLE ]': '[ AVAILABLE INFRASTRUCTURE ]'}
           </span>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-4">
             {isEs ? 'Catálogo de Protocolos' : 'Protocol Catalog'}
