@@ -20,7 +20,8 @@ export default function About() {
           </div>
           
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-main)] leading-[0.9] tracking-tighter uppercase mb-12">
-            No somos una agencia.<br/>
+            {isEs? 'No somos una agencia':'We are not an agency.'} <br/>
+            <br/>
             <span className="text-transparent stroke-text opacity-50" style={{ WebkitTextStroke: '2px var(--text-main)' }}>
               {isEs ? 'Somos Ingeniería de Crecimiento.' : 'We are Growth Engineering.'}
             </span>

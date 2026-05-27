@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from '@/hooks/use-cart';
 import { Trash2, ArrowRight, Activity, TerminalSquare } from 'lucide-react';
 import { CartItem } from '@/types';
+import { translatePlanTitle } from "@/lib/utils";
 
 export default function CartPage() {
   const { items, total, removeFromCart, clearCart } = useCart();
@@ -50,7 +51,7 @@ export default function CartPage() {
               {isEs ? 'Terminal de Inversión' : 'Investment Terminal'}
             </h1>
             <p className="font-mono text-[var(--accent-primary)] mt-2 font-bold tracking-widest text-sm">
-              [ STATUS: READY_FOR_DEPLOYMENT ]
+              {isEs ? 'ESTADO: LISTOS_PARA_DESPLIEGUE':'[ STATUS: READY_FOR_DEPLOYMENT ]'}
             </p>
           </div>
           {/* Botón para matar el bug del item fantasma */}
@@ -81,7 +82,9 @@ export default function CartPage() {
                 <div key={item.id} className="flex flex-col md:flex-row items-center p-4 hover:bg-[var(--text-main)] hover:text-white transition-colors group">
                   <div className="w-full md:w-1/2 mb-4 md:mb-0">
                     <h3 className="font-bold uppercase tracking-tight text-lg">
-                      {item.vx_plans?.title || (isEs ? 'Desarrollo a Medida' : 'Custom Development')} 
+                      {item.vx_plans?.title
+                        ? translatePlanTitle(item.vx_plans.title, isEs)
+                        : (isEs ? 'Desarrollo a Medida' : 'Custom Development')}
                     </h3> 
                     <span className="inline-block text-[10px] font-mono opacity-50 uppercase mt-1">
                       Folio: {item.quote_id || item.plan_id || 'SYS_DEFAULT'}
