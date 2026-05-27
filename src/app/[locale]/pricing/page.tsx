@@ -60,7 +60,7 @@ export default function CustomPricingPage() {
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="mb-12 border-b-4 border-[var(--text-main)] pb-6">
           <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-            [ VALIDACIÓN DE REFERENCIA ]
+            {isEs ? '[ VALIDACIÓN DE REFERENCIA ]' : '[ REFERENCE VALIDATION ]'}
           </span>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase">
             {isEs ? 'Terminal de Cotización' : 'Quote Terminal'}
