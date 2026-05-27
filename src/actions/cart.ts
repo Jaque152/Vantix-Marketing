@@ -13,7 +13,7 @@ export async function addToCart(planId: string, customPrice?: number, quoteId?: 
 
   // Verificamos si el item ya existe en el carrito
   const { data: existingItem } = await supabase
-    .from('vx_cart_items') // ACTUALIZADO
+    .from('vx_cart_items') 
     .select('id, quantity')
     .eq('plan_id', planId)
     .eq('session_id', sessionId)

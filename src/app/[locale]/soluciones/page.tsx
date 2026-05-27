@@ -102,9 +102,6 @@ export default async function SolucionesPage({ params }: { params: Promise<{ loc
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
           
           <div className="mb-8 md:mb-0 max-w-2xl relative z-10">
-            <span className="text-[var(--accent-primary)] font-mono uppercase tracking-[0.2em] text-xs font-bold block mb-4">
-              [ INFRAESTRUCTURA A MEDIDA ]
-            </span>
             <h3 className="text-3xl md:text-4xl font-bold tracking-tighter uppercase mb-4">
               {isEs ? 'Plan Personalizado' : 'Custom Plan'}
             </h3>

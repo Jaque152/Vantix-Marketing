@@ -7,7 +7,7 @@ import { useCart } from "@/hooks/use-cart";
 import { CheckCircle, Loader2, CreditCard, ShieldAlert, Lock } from "lucide-react";
 import { processCheckout } from "@/actions/checkout";
 import { CartItem, CheckoutPayload } from "@/types";
-
+import { translatePlanTitle } from "@/lib/utils";
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const locale = useLocale();
@@ -225,7 +225,9 @@ export default function CheckoutPage() {
                   <div key={idx} className="flex justify-between text-xs font-mono items-start text-[var(--text-main)]">
                     <span className="flex-1 pr-4 leading-relaxed">
                       <span className="text-[var(--accent-primary)] font-bold mr-2">{item.quantity}x</span>
-                      {item.vx_plans?.title || (isEs ? 'Desarrollo a Medida' : 'Custom Development')}
+                      {item.vx_plans?.title
+                        ? translatePlanTitle(item.vx_plans.title, isEs)
+                        : (isEs ? 'Desarrollo a Medida' : 'Custom Development')}
                     </span>
                     <span className="font-bold whitespace-nowrap mt-0.5">
                       {formatPrice(itemPrice * item.quantity)}

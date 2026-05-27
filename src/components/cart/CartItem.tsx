@@ -6,7 +6,7 @@ import { updateQuantity } from '@/actions/cart'; // Importación correcta del Se
 import { useCart } from '@/hooks/use-cart';
 import { Minus, Plus, Trash2, Loader2 } from 'lucide-react';
 import { useLocale } from 'next-intl';
-
+import { translatePlanTitle } from '@/lib/utils';
 export function CartItemComponent({ item }: { item: CartItem }) {
   const { refreshCart, removeFromCart } = useCart();
   const [isPending, startTransition] = useTransition();
@@ -43,7 +43,9 @@ export function CartItemComponent({ item }: { item: CartItem }) {
       <div className="flex-1 flex flex-col justify-between">
         <div className="pr-6">
           <h4 className="font-bold text-lg text-[var(--text-main)] leading-tight tracking-tight">
-            {item.vx_plans?.title || (isEs ? 'Estrategia Personalizada' : 'Custom Strategy')}
+            {item.vx_plans?.title
+              ? translatePlanTitle(item.vx_plans.title, isEs)
+              : (isEs ? 'Estrategia Personalizada' : 'Custom Strategy')}
           </h4>
           
           {item.quote_id && (
